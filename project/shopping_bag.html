@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./styles/header.css" />
+    <link rel="stylesheet" href="./styles/footer.css">
+    <style>
+        #cover{
+            display: flex;
+            font-size: 12px;
+        }
+        #cart_display{
+            /* border: solid black 1px; */
+            /* height: 500px; */
+            flex: 3;
+            padding-left: 10%;
+            padding-right: 10%;
+        }
+        #cart_checkout{
+            padding-top: 40px;
+          
+            flex: 1;
+        }
+        #item_cover{
+            /* border: solid rgb(241, 4, 4) 1px; */
+            display: flex;
+            padding-top: 2%;
+        }
+        #item_cover div:nth-child(1){
+            /* border: solid black 1px; */
+            flex: 0.5;
+        }
+        #item_cover div:nth-child(1) img{
+            /* border: solid black 1px; */
+            width: 50%;
+        }
+        #item_cover div:nth-child(2){
+            /* border: solid black 1px; */
+            flex: 3;
+        }
+
+        #item_cover div:nth-child(3){
+            /* border: solid black 1px; */
+            flex: 2;
+            text-align: right;
+        }
+        .underline{
+
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        #cart_head{
+            border-bottom: solid black 1px;
+            padding-left: 10%;
+            display:flex;
+            justify-content: space-between;
+        }
+        #total_cart{
+            border-bottom: solid black 1px;  
+            
+            height: 100px;
+            display: flex;
+            justify-content: space-between;
+            padding-left: 9%;
+        }
+        #total_cart div:nth-child(2){
+            text-align: right;
+        }
+        .bold_txt{
+            font-weight: bold;
+        }
+        #cart_checkout a{
+            text-decoration: underline;
+        }
+        #proceed_btn{
+            background-color: black;
+            color: white;
+            width: 50%;
+            padding: 3%;
+            padding-left: 20%;
+            padding-right: 20%;
+            cursor: pointer;
+            
+        }
+    </style>
+
+  </head>
+  <body>
+    <div id="nav_cover"></div>
+    <div id="cover">
+
+        <div id="cart_display">
+
+            <p>SHOPPING BAG</p>
+            <div id="cart_head">
+                <p>ITEM</p>
+                <p>PRICE</p>
+            </div>
+
+           
+
+        </div>
+        <div id="cart_checkout">
+
+            <p>LOGGED IN AS</p>
+            <p id="user_name"></p>
+            <p>not your account <a href="sign_in.html">sign in with different account</a></p>
+            <p id="proceed_btn"> PROCEED TO CHECKOUT</p>
+        </div>
+       
+      </div>
+      
+    </div>
+    <div id="footer"></div>
+  </body>
+</html>
+<script type="module">
+  import header from "./components/header.js";
+
+  let nav_cover = document.getElementById("nav_cover");
+
+  nav_cover.innerHTML = header();
+
+  import footer_func from "./components/footer.js"
+  let footer =document.getElementById("footer")
+  footer.innerHTML=footer_func()
+
+
+  let user_name= JSON.parse(localStorage.getItem("loged_in"))
+
+if(user_name!==null &user_name!==undefined & user_name!==""){
+  document.getElementById("log_in").innerText="ACCOUNT"
+  
+}
+
+let cart_arr=JSON.parse(localStorage.getItem("cart_arr"))||[]
+let wishlist_arr = JSON.parse(localStorage.getItem("wishlist_arr"))||[]
+let cart_display=document.getElementById("cart_display")
+
+function append_cart(){
+    let order_total=0
+    cart_arr.forEach(function(item){
+        
+        
+        let item_cover=document.createElement("div");
+        item_cover.id="item_cover"
+        let div1=document.createElement("div")
+        div1.id="div1"
+
+        let img=document.createElement("img");
+        img.src=item.img1
+
+        div1.append(img)
+
+        let div2=document.createElement("div")
+        div2.id="div2"
+
+        let brand=document.createElement("p");
+        brand.innerText=item.brand;
+        let name=document.createElement("p");
+        name.innerText=item.name       
+        let size=document.createElement("p");
+        size.innerText=`SIZE:${item.size}`
+        let to_wishlist=document.createElement("p");
+        to_wishlist.innerText="Move to wishlist"
+        to_wishlist.className="underline"
+        to_wishlist.addEventListener("click",function(){
+
+            wishlist_arr.push(item);
+             localStorage.setItem("wishlist_arr", JSON.stringify(wishlist_arr));
+
+
+            for(let i=0;i<cart_arr.length;i++){
+            // console.log(item.idMeal)
+            if(cart_arr[i].name==item.name){
+                cart_arr.splice(i,1)
+                localStorage.setItem("cart_arr",JSON.stringify(cart_arr))
+            
+                location.reload()
+                break;
+            }
+
+        }
+        })
+
+        div2.append(brand,name,size,to_wishlist)
+
+        let div3=document.createElement("div")
+        div3.id="div3"
+
+        let price=document.createElement("p");
+        price.innerText=`$${item.price}.00 USD`
+
+        order_total+=(+item.price)
+
+        let remove=document.createElement("p")
+        remove.innerText="REMOVE"
+        remove.className="underline"
+        remove.addEventListener("click",function(){
+            for(let i=0;i<cart_arr.length;i++){
+            // console.log(item.idMeal)
+            if(cart_arr[i].name==item.name){
+                cart_arr.splice(i,1)
+                localStorage.setItem("cart_arr",JSON.stringify(cart_arr))
+            
+                location.reload()
+                break;
+            }
+
+        }
+        })
+
+        div3.append(price,remove)
+
+        item_cover.append(div1,div2,div3);
+        let hr=document.createElement("hr")
+        cart_display.append(item_cover,hr) 
+    });
+
+let total_cart=document.createElement("div");
+total_cart.id="total_cart"
+
+let div_a=document.createElement("div")
+let p1=document.createElement("p")
+p1.textContent="Total"
+
+let p2=document.createElement("p")
+p2.textContent="Shipping estimate"
+
+let p3=document.createElement("p")
+p3.textContent="Order Total"
+p3.className="bold_txt"
+
+div_a.append(p1,p2,p3)
+
+
+let div_b=document.createElement("div")
+let p4=document.createElement("p")
+p4.textContent=`$${order_total}.00 USD`
+let p5=document.createElement("p")
+p5.textContent="Calculated at Checkout"
+
+let p6=document.createElement("p")
+p6.textContent=`$${order_total}.00 USD`
+p6.className="bold_txt"
+
+div_b.append(p4,p5,p6)
+
+total_cart.append(div_a,div_b)
+
+cart_display.append(total_cart)
+
+
+let user_name=document.getElementById("user_name");
+
+let loged_in=JSON.parse(localStorage.getItem("loged_in"));
+
+user_name.innerText=loged_in;
+
+
+
+
+}
+
+append_cart()
+
+let proceed_btn =document.getElementById("proceed_btn");
+proceed_btn.addEventListener("click",function(){
+    
+    window.location.href="checkout.html"
+})
+</script>
+
+<script type="module" src="./scripts/cart_count.js"></script>

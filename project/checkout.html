@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./styles/header.css" />
+    <link rel="stylesheet" href="./styles/footer.css">
+    
+    <style>
+        #cover{
+            display: flex;
+            font-size: 12px;
+            padding-left: 10%;
+            padding-right: 10%;
+        }
+        #cart_display{
+           
+            flex: 1.2;
+            /* padding-left: 10%; */
+            /* padding-right: 10%; */
+        }
+        #cart_display_in{
+
+            /* border: solid black 1px; */
+            height: 300px;
+            overflow-y: scroll;
+        }
+        #cart_checkout{
+            /* border: solid rgb(241, 4, 4) 1px; */
+            padding-right: 10%;
+            
+            flex: 3;
+            
+            
+        }
+       
+        #cart_checkout input{
+            width: 80%;
+            height: 30px;
+            margin-left: 5%;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+         label{
+            margin-left: 5%;
+            
+
+        }
+        #item_cover{
+            /* border: solid rgb(241, 4, 4) 1px; */
+            display: flex;
+            padding-top: 8%;
+            gap: 3%;
+        }
+         p{
+            margin: 0;
+            line-height: 20px;
+        }
+        #item_cover div:nth-child(1){
+            /* border: solid black 1px; */
+            flex: 0.5;
+        }
+        #item_cover div:nth-child(1) img{
+            /* border: solid black 1px; */
+            width: 100%;
+        }
+        #item_cover div:nth-child(2){
+            /* border: solid black 1px; */
+            flex: 3;
+        }
+
+        #item_cover div:nth-child(3){
+            /* border: solid black 1px; */
+            flex: 2;
+            text-align: right;
+        }
+        .underline{
+
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        #cart_head{
+            border-bottom: solid black 1px;
+          
+        }
+        #total_cart{
+            margin-top: 30px;
+            border-top: 1px solid #000;
+            border-bottom: solid black 1px;  
+            
+            height: 100px;
+            display: flex;
+            justify-content: space-between;
+            /* padding-left: 9%; */
+        }
+        #total_cart div:nth-child(2){
+            text-align: right;
+        }
+        .bold_txt{
+            font-weight: bold;
+        }
+        #cart_checkout a{
+            text-decoration: underline;
+        }
+      
+        #place_order_btn{
+            background-color: black;
+            color: white;
+            width: 30%;
+            padding: 3%;
+            padding-left: 35%;
+            padding-right: 35%;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+        }
+        #radio_btns{
+            padding-left: 10px required;
+        }
+        
+    </style>
+
+  </head>
+  <body>
+    <div id="nav_cover"></div>
+    <div id="cover">  
+        <div id="cart_checkout">   
+                <p>CHECKOUT</p>
+                <p>SHIPPING ADDRESS</p>
+                <hr>
+                    <table>
+                        <tr>
+                            <td><label>First Name</label></td>
+                            <td><label >Last Name</label></td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="text" required></td>
+                            <td><input type="text" required></td>
+                        </tr>
+
+                        <tr>
+                            <td><label>Street Address</label> </td>
+                            <td><label >Company (Optional)</label></td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="text" required></td>
+                            <td><input type="text" ></td>
+                        </tr>
+
+                        <tr>
+                            <td><label>City</label> </td>
+                            <td><label>ZIP Or Postal Code</label></td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="text" required></td>
+                            <td><input type="text" style="width: 40%;" required></td>
+                        </tr>
+
+                        <tr>
+                            <td><label>Country/Region</label> </td>
+                            <td><label>State/Province</label></td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="text"></td>
+                            <td><input type="text" style="width: 40%;" required></td>
+                        </tr>
+
+                        <tr>
+                            <td><label>Phone</label> </td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="text" style="width: 40%;" ></td>
+                        </tr>
+
+                    </table>
+                    <div id="radio_btns">
+
+                        <P>SHIPPING METHOD</P>
+                    <hr>
+                    <p > $40.00 USD | 12 days|standard</p>
+                    <br>
+                    <p>PAYMENT METHOD</p>
+                    <hr>
+                    <input type="radio" id="age1" name="age" value="30"style="width: 2%;height: 12px; margin: 0px;"><span>Pay with credit or debit card</span>
+                    <br>
+                    <br>
+                    <input type="radio" id="age1" name="age" value="30"style="width: 2%;height: 12px; margin: 0px;"><span>Pay with PayPal</span>
+                    <br>
+                    <br>
+                    <input type="radio" id="age1" name="age" value="30"style="width: 2%;height: 12px; margin: 0px;"><span>Pay with PayPal</span>
+                    <br>
+                    <br>
+                    <p>CARD DETAILS</p>
+                    <hr>
+                    </div>
+
+                    
+                    <table>
+                        <tr>
+                            <td><label>Coard Number</label> </td>
+                            <td><label>Expiration date</label></td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="text" placeholder="1234 1234 1234 1234"></td>
+                            <td><input type="text" style="width: 40%;" placeholder="MM/YY"></td>
+                        </tr>
+                        <tr>
+                            <td><label>Cardholder’s name</label> </td>
+                            <td><label>CVV</label></td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="text"></td>
+                            <td><input type="text" style="width: 40%;" placeholder="CVV"></td>
+                        </tr>
+                    </table>
+        </div>
+
+        <div id="cart_display">
+
+            
+            <div id="cart_head">
+                <p id="order_count"></p>
+                
+            </div>
+            <div id="cart_display_in"></div>
+
+           
+
+            
+        </div>
+       
+      </div>
+
+    </div>
+    <div id="footer"></div>
+  </body>
+</html>
+<script type="module">
+  import header from "./components/header.js";
+
+  let nav_cover = document.getElementById("nav_cover");
+
+  nav_cover.innerHTML = header();
+
+
+  import footer_func from "./components/footer.js"
+  let footer =document.getElementById("footer")
+  footer.innerHTML=footer_func()
+
+  let user_name= JSON.parse(localStorage.getItem("loged_in"))
+
+if(user_name!==null &user_name!==undefined & user_name!==""){
+  document.getElementById("log_in").innerText="ACCOUNT"
+  
+}
+
+let cart_arr=JSON.parse(localStorage.getItem("cart_arr"))||[]
+let wishlist_arr = JSON.parse(localStorage.getItem("wishlist_arr"))||[]
+let cart_display_in=document.getElementById("cart_display_in")
+
+function append_cart(){
+    document.getElementById("order_count").innerText=`ORDER SUMMARY - (${cart_arr.length}) ITEMS`
+    let order_total=0
+    cart_arr.forEach(function(item){
+        
+        
+
+        let item_cover=document.createElement("div");
+        item_cover.id="item_cover"
+        let div1=document.createElement("div")
+        div1.id="div1"
+
+        let img=document.createElement("img");
+        img.src=item.img1
+
+        div1.append(img)
+
+        let div2=document.createElement("div")
+        div2.id="div2"
+
+        let brand=document.createElement("p");
+        brand.innerText=item.brand;
+        let name=document.createElement("p");
+        name.innerText=item.name       
+        let size=document.createElement("p");
+        size.innerText=`Size:${item.size}`
+
+
+        div2.append(brand,name,size)
+
+        let div3=document.createElement("div")
+        div3.id="div3"
+
+        let price=document.createElement("p");
+        price.innerText=`$${item.price}.00 USD`
+
+        order_total+=(+item.price)
+
+
+        div3.append(price)
+
+        item_cover.append(div1,div2,div3);
+        let hr=document.createElement("hr")
+        cart_display_in.append(item_cover) 
+    });
+
+let total_cart=document.createElement("div");
+total_cart.id="total_cart"
+
+let div_a=document.createElement("div")
+let p1=document.createElement("p")
+p1.textContent="Total"
+
+let p2=document.createElement("p")
+p2.textContent="Shipping estimate"
+
+let p3=document.createElement("p")
+p3.textContent="Order Total"
+p3.className="bold_txt"
+
+div_a.append(p1,p2,p3)
+
+
+let div_b=document.createElement("div")
+let p4=document.createElement("p")
+p4.textContent=`$${order_total}.00 USD`
+let p5=document.createElement("p")
+p5.textContent="Calculated at Checkout"
+
+let p6=document.createElement("p")
+p6.textContent=`$${order_total}.00 USD`
+p6.className="bold_txt"
+
+div_b.append(p4,p5,p6)
+
+total_cart.append(div_a,div_b)
+
+let info=document.createElement("p");
+info.innerText=`Important Notice
+Our prices do not include Duty and VAT. Please consult your
+country/region’s customs legislation for more information about 
+potential additional charges.`
+
+let btn=document.createElement("p");
+btn.innerText="PLACE ORDER"
+btn.id="place_order_btn"
+
+btn.addEventListener("click",function(){
+    alert("order successfully placed !")
+    cart_arr=[]
+    localStorage.setItem("cart_arr",JSON.stringify(cart_arr))
+
+    window.location.href="home.html"
+})
+cart_display.append(total_cart,info,btn)
+
+
+
+
+
+
+}
+
+append_cart()
+</script>
+
+<script type="module" src="./scripts/cart_count.js"></script>

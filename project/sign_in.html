@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./styles/header.css" />
+    <link rel="stylesheet" href="./styles/footer.css">
+<style>
+    #cover{
+        /* border: solid black 1px; */
+     
+        width: 30%;
+        margin: auto;
+        font-size: 12px;
+        margin-top: 100px;
+        min-height: 600px;
+    }
+    /* #cover label{
+
+        
+    } */
+    #cover input{
+          width: 98%;
+          height: 25px;
+          margin-bottom: 30px;
+          margin-top: 10px;
+    }
+    #cover span{
+        background-color: black;
+        color: white;
+        padding: 2.5%;
+        padding-left: 37.5%;
+        padding-right: 38%;
+        /* margin-top: 50px; */
+        cursor: pointer;
+    }
+   .show_flex{
+        margin: auto;
+        margin-top: 30px;
+        display: flex;
+        justify-content:space-evenly;
+        gap: 0;
+    }
+    .show_flex input{
+      
+        width: 10% !important;
+    }
+    .show_flex label{
+        margin-top: 15px;
+    }
+    #back_btn{
+      cursor: pointer;
+    }
+</style>
+  </head>
+  <body>
+    <div id="nav_cover"></div>
+    <div id="cover">
+
+       <div>
+           <p>CREATE ACCOUNT</p>
+           <label>Email address</label>
+           <br>
+           
+           <input id="email" type="email"/>
+           <br>
+           <label>password</label>
+           <br>
+           
+           <input id="pass" type="password"/>
+           <br>
+           <p>Sign up for updates and promotions</p>
+         
+           <div class="show_flex">
+            
+                <input type="checkbox">
+                <label for="vehicle1">MEN'S</label><br>
+                <input type="checkbox">
+                <label for="vehicle2">WOMEN'S</label><br>
+                <input type="checkbox">
+                <label for="vehicle3">NO THANK'S</label><br><br>
+               
+            
+           </div>
+           <span id="create_ac_btn">CREATEACCOUNT</span>
+           <P class="show_flex" id="back_btn">BACK</P>
+       </div>
+       
+      </div>
+      
+    </div>
+    <div id="footer"></div>
+  </body>
+</html>
+<script type="module">
+  import header from "./components/header.js";
+
+  let nav_cover = document.getElementById("nav_cover");
+
+  nav_cover.innerHTML = header();
+
+
+  import footer_func from "./components/footer.js"
+  let footer =document.getElementById("footer")
+  footer.innerHTML=footer_func()
+
+  let create_ac_btn=document.getElementById("create_ac_btn");
+
+  let user_arr=JSON.parse(localStorage.getItem("user_arr"))||[];
+
+  let trying_user=JSON.parse(localStorage.getItem("trying_user"));
+    email.value=trying_user;
+
+  create_ac_btn.addEventListener("click",function(){
+
+    let email=document.getElementById("email").value;
+    
+
+    let pass=document.getElementById("pass").value;
+
+    let user={
+        email:email,
+        pass:pass
+    }
+
+    user_arr.push(user)
+    localStorage.setItem("user_arr",JSON.stringify(user_arr))
+    window.location.href="login.html"
+  })
+
+
+  let back_btn=document.getElementById("back_btn");
+
+  back_btn.addEventListener("click",function(){
+
+    window.location.href="login.html"
+  });
+</script>

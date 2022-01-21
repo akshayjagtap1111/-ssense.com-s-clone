@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./styles/header.css" />
+
+    <link rel="stylesheet" href="./styles/grid_display.css" />
+    <link rel="stylesheet" href="./styles/footer.css">
+  </head>
+  <body>
+    <div id="nav_cover"></div>
+    <div id="cover">
+      <div id="sidebar_left"></div>
+      <div id="product_grid"></div>
+      <div id="sidebar_right"></div>
+    </div>
+    <div id="footer"></div>
+  </body>
+</html>
+<script type="module">
+  import header from "./components/header.js";
+
+  let nav_cover = document.getElementById("nav_cover");
+
+  nav_cover.innerHTML = header();
+
+  import sidebar_left_func from "./components/sidebar_left_func.js";
+
+  let sidebar_left = document.getElementById("sidebar_left");
+
+  sidebar_left.innerHTML = sidebar_left_func();
+
+  import sidebar_right_func from "./components/sidebar_right_func.js";
+
+  let sidebar_right = document.getElementById("sidebar_right");
+
+  sidebar_right.innerHTML = sidebar_right_func();
+
+
+  import footer_func from "./components/footer.js"
+  let footer =document.getElementById("footer")
+  footer.innerHTML=footer_func()
+
+  let user_name = JSON.parse(localStorage.getItem("loged_in"));
+
+  if (user_name !== null & user_name !== undefined & user_name!=="") {
+    document.getElementById("log_in").innerText = "ACCOUNT";
+  }
+</script>
+<script type="module" src="./scripts/grid_display.js"></script>
+<script type="module" src="./scripts/cart_count.js"></script>

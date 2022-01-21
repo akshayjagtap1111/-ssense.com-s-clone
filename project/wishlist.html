@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./styles/header.css" />
+    <link rel="stylesheet" href="./styles/footer.css">
+
+    <style>
+      #cover {
+        /* border: solid black 1px; */
+        width: 60%;
+        margin: auto;
+        font-size: 10px;
+        min-height: 600px;
+      }
+      #item_cover {
+        display: flex;
+        padding-top: 2%;
+      }
+      #item_cover div:nth-child(1) {
+        flex: 0.5;
+      }
+      #item_cover div:nth-child(1) img {
+        width: 50%;
+      }
+      #item_cover div:nth-child(2) {
+        flex: 3;
+      }
+      .underline {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+      
+  
+    </style>
+  </head>
+  <body>
+    <div id="nav_cover"></div>
+    <div id="cover">
+      <h4>WISHLIST</h4>
+      <p>
+        Use this page to manage the items you have added to your wishlist. Items
+        saved can be removed or added to your Shopping Bag for purchase.
+      </p>
+      <hr />
+    </div>
+    <div id="footer">
+
+    </div>
+  </body>
+</html>
+<script type="module">
+  import header from "./components/header.js";
+ 
+
+  let nav_cover = document.getElementById("nav_cover");
+
+  nav_cover.innerHTML = header();
+
+  import footer_func from "./components/footer.js"
+  let footer =document.getElementById("footer")
+  footer.innerHTML=footer_func()
+
+  let user_name = JSON.parse(localStorage.getItem("loged_in"));
+
+  if ((user_name !== null) & (user_name !== undefined) & (user_name !== "")) {
+    document.getElementById("log_in").innerText = "ACCOUNT";
+  }
+
+  let wishlist_arr = JSON.parse(localStorage.getItem("wishlist_arr")) || [];
+  let cover = document.getElementById("cover");
+
+  function append_wishlist() {
+    wishlist_arr.forEach(function (item) {
+      let item_cover = document.createElement("div");
+      item_cover.id = "item_cover";
+      let div1 = document.createElement("div");
+      div1.id = "div1";
+
+      let img = document.createElement("img");
+      img.src = item.img1;
+
+      div1.append(img);
+
+      let div2 = document.createElement("div");
+      div2.id = "div2";
+
+      let brand = document.createElement("p");
+      brand.innerText = item.brand;
+      let name = document.createElement("p");
+      name.innerText = item.name;
+      let size = document.createElement("p");
+      size.innerText = `SIZE:${item.size}`;
+
+      div2.append(brand, name, size);
+
+      let div3 = document.createElement("div");
+      div3.id = "div3";
+
+      let price = document.createElement("p");
+      price.innerText = `$${item.price}.00 USD`;
+
+      // order_total+=(+item.price)
+
+      let remove = document.createElement("p");
+      remove.innerText = "REMOVE";
+      remove.className = "underline";
+      remove.addEventListener("click", function () {
+        for (let i = 0; i < wishlist_arr.length; i++) {
+          // console.log(item.idMeal)
+          if (wishlist_arr[i].name == item.name) {
+            wishlist_arr.splice(i, 1);
+            localStorage.setItem("wishlist_arr", JSON.stringify(wishlist_arr));
+
+            location.reload();
+            break;
+          }
+        }
+      });
+
+      div3.append(price, remove);
+
+      item_cover.append(div1, div2, div3);
+      let hr = document.createElement("hr");
+      cover.append(item_cover, hr);
+    });
+  }
+
+  append_wishlist();
+</script>
+
+<script type="module" src="./scripts/cart_count.js"></script>

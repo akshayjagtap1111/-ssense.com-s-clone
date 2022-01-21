@@ -1,0 +1,22 @@
+#footer{
+    /* border: solid black 1px; */
+    font-size: 12px;
+}
+#footer div{
+  /* border: solid black 1px; */
+  width: 60%;
+  margin: auto;
+  display: flex;
+}
+#footer div:nth-child(2){
+  font-size: 10px;
+  width: 25%;
+}
+#footer div p{
+    padding-left: 2%;
+
+}
+#footer div p:hover{
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+}

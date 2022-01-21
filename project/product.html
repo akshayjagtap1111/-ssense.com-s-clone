@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./styles/header.css" />
+    <link rel="stylesheet" href="./styles/footer.css">
+    <style>
+      #cover {
+        display: flex;
+        font-size: 12px;
+      }
+
+      #prod_left {
+        /* border: solid black 1px; */
+        flex: 1;
+        padding-left: 3%;
+      }
+
+      #prod_left ul {
+        flex-direction: column;
+      }
+
+      #prod_left div {
+        position: fixed;
+        top: 250px;
+      }
+      #prod_mid {
+        /* border: solid black 1px; */
+        flex: 1.5;
+        display: grid;
+      }
+
+      #prod_mid img {
+        width: 50%;
+        margin: auto;
+      }
+      #prod_right {
+        /* border: solid black 1px; */
+        flex: 1;
+      }
+
+      #prod_right div {
+        position: fixed;
+        top: 250px;
+        width: 100%;
+      }
+      #add_to_cart {
+        padding: 1%;
+        background-color: black;
+        position: relative;
+        top: 30px;
+        padding-right: 4%;
+        padding-left: 4%;
+        color: white;
+        cursor: pointer;
+      }
+
+      #wishlist_btn {
+        padding: 1%;
+        position: relative;
+        top: 30px;
+        padding-right: 4%;
+        cursor: pointer;
+        /* padding-left: 4%; */
+      }
+      #size_selector {
+        width: 25%;
+        height: 30px;
+      }
+      #sizechart {
+        margin-top: 55px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="nav_cover"></div>
+    <div id="cover">
+      <div id="prod_left"></div>
+      <div id="prod_mid"></div>
+      <div id="prod_right"></div>
+    </div>
+
+    <div id="footer"></div>
+  </body>
+</html>
+<script type="module">
+  import header from "./components/header.js";
+
+  let nav_cover = document.getElementById("nav_cover");
+
+  nav_cover.innerHTML = header();
+
+  import footer_func from "./components/footer.js"
+  let footer =document.getElementById("footer")
+  footer.innerHTML=footer_func()
+
+  let user_name = JSON.parse(localStorage.getItem("loged_in"));
+
+  if (user_name !== null & user_name !== undefined & user_name!=="") {
+    document.getElementById("log_in").innerText = "ACCOUNT";
+  }
+
+  let current_product = JSON.parse(localStorage.getItem("current_product"));
+
+  let cart_arr = JSON.parse(localStorage.getItem("cart_arr")) || [];
+
+
+  let wishlist_arr = JSON.parse(localStorage.getItem("wishlist_arr")) || [];
+
+  let nav_cart_count = document.getElementById("shopping_bag");
+
+  function append_product(product) {
+    // console.log(product)
+    let prod_left = document.getElementById("prod_left");
+
+    let left_div = document.createElement("div");
+    let brand = document.createElement("p");
+    brand.innerText = product.brand;
+
+    let name = document.createElement("p");
+    name.innerText = product.name;
+
+    let desc = document.createElement("p");
+    desc.innerText = product.desc;
+
+    let desc_arr = product.desc_arr;
+    let ul = document.createElement("ul");
+    for (let i of desc_arr) {
+      let li = document.createElement("li");
+      li.innerText = i;
+      ul.append(li);
+    }
+
+    left_div.append(brand, name, desc, ul);
+    prod_left.append(left_div);
+
+    let img1 = document.createElement("img");
+    img1.src = product.img1;
+
+    let img2 = document.createElement("img");
+    img2.src = product.img2;
+
+    let img3 = document.createElement("img");
+    img3.src = product.img3;
+
+    prod_mid.append(img1, img2, img3);
+
+    let checkin_div = document.createElement("div");
+    let price = document.createElement("p");
+    price.innerText = `$${product.price}USD`;
+
+    let select = document.createElement("select");
+    select.id = "size_selector";
+    let op1 = document.createElement("option");
+    op1.innerText = "SELECT A SIZE";
+    op1.value = undefined;
+    let op2 = document.createElement("option");
+    op2.innerText = "Small";
+    op2.value = "mall";
+    let op3 = document.createElement("option");
+    op3.innerText = "Medium";
+    op3.value = "Medium";
+    let op4 = document.createElement("option");
+    op4.innerText = "Large";
+    op4.value = "Large";
+    let op5 = document.createElement("option");
+    op5.innerText = "XL";
+    op5.value = "XL";
+    let op6 = document.createElement("option");
+    op6.innerText = "XXL";
+    op6.value = "XXL";
+
+    select.append(op1, op2, op3, op4, op5, op6);
+
+    let add_to_cart = document.createElement("span");
+    add_to_cart.innerText = "ADD TO BAG";
+    add_to_cart.id = "add_to_cart";
+    add_to_cart.addEventListener("click", function () {
+      let size_value = document.getElementById("size_selector").value;
+      
+      product.size = size_value;
+
+      if (product.size !== "undefined") {
+        
+        cart_arr.push(product);
+        nav_cart_count.innerText = `SHOPPING BAG (${cart_arr.length})`;
+        localStorage.setItem("cart_arr", JSON.stringify(cart_arr));
+        add_to_cart.innerText = "ADDED TO BAG";
+      } else {
+        alert("please Select Size First");
+      }
+    });
+
+    let wishlist = document.createElement("span");
+    wishlist.innerText = "ADD TO WISHLIST";
+    wishlist.id = "wishlist_btn";
+    wishlist.addEventListener("click", function () {
+      let size_value = document.getElementById("size_selector").value;
+      product.size = size_value;
+
+      if (product.size !== "undefined") {
+        wishlist_arr.push(product);
+        localStorage.setItem("wishlist_arr", JSON.stringify(wishlist_arr));
+      } else {
+        alert("please Select Size First");
+      }
+    });
+
+    let sizechart = document.createElement("p");
+    sizechart.id = "sizechart";
+    sizechart.innerText = "size pridector - view size chart";
+
+    sizechart.addEventListener("click", function () {
+      /////////////////////////////////////////////////
+    });
+
+    let br1 = document.createElement("br");
+    let br2 = document.createElement("br");
+    let br3 = document.createElement("br");
+    let br4 = document.createElement("br");
+
+    checkin_div.append(
+      price,
+      br1,
+      select,
+      br2,
+      add_to_cart,
+      wishlist,
+      br3,
+      sizechart
+    );
+    prod_right.append(checkin_div);
+  }
+
+  
+  append_product(current_product);
+</script>
+
+<script type="module" src="./scripts/cart_count.js"></script>

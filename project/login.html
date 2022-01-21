@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./styles/header.css" />
+    <link rel="stylesheet" href="./styles/footer.css">
+<style>
+    #cover{
+        /* border: solid black 1px; */
+        /* height: 200px; */
+        width: 30%;
+        margin: auto;
+        font-size: 12px;
+        margin-top: 100px;
+
+        min-height: 500px;
+    }
+    /* #cover label{
+
+        
+    } */
+    #cover input{
+          width: 98%;
+          height: 25px;
+          margin-bottom: 30px;
+          margin-top: 10px;
+    }
+    #cover span{
+        background-color: black;
+        color: white;
+        padding: 2.5%;
+        padding-left: 43%;
+        padding-right: 43%;
+        /* margin-top: 50px; */
+        cursor: pointer;
+    }
+</style>
+  </head>
+  <body>
+    <div id="nav_cover"></div>
+    <div id="cover">
+
+       <div>
+           <p>LOGIN OR CREATE ACCOUNT</p>
+           <label>Email address</label>
+           <br>
+           
+           <input type="email" id="user_email"required="" 
+           oninvalid="this.setCustomValidity('Please Enter valid email')"
+           oninput="setCustomValidity('')"/>
+           <br>
+           
+           <span id="continue_btn">CONTINUE</span>
+       </div>
+       
+      </div>
+      
+    </div>
+    <div id="footer"></div>
+  </body>
+</html>
+<script type="module">
+  import header from "./components/header.js";
+
+  let nav_cover = document.getElementById("nav_cover");
+
+  nav_cover.innerHTML = header();
+
+
+  let continue_btn=document.getElementById("continue_btn")
+
+  let user_arr=JSON.parse(localStorage.getItem("user_arr"))||[];
+
+import log_in from "./scripts/login_pass.js"
+
+let cover=document.getElementById("cover")
+
+  continue_btn.addEventListener("click",function(){
+
+    let user_email=document.getElementById("user_email").value;
+
+    
+ 
+    
+    
+
+let flag=false;
+    for(let i=0;i<user_arr.length;i++){
+        if(user_arr[i].email===user_email){
+          
+            cover.innerHTML= log_in()
+            document.getElementById("email2").value=user_email
+            let user_pass=user_arr[i].pass
+
+            document.getElementById("continue_btn2").addEventListener("click",function(){
+
+                let pass=document.getElementById("pass").value;
+
+                console.log(pass)
+                console.log(user_pass)
+
+                if(pass=user_pass){
+                    alert("login successful")
+                    localStorage.setItem("loged_in",JSON.stringify(user_email))
+                    window.location.href="home.html"
+                }
+                else{
+                    alert("Wrong password")
+                }
+
+            })
+
+
+           flag=true;
+           break 
+
+        }
+    }
+    if(!flag){
+     
+      localStorage.setItem("trying_user",JSON.stringify(user_email))
+        window.location.href="sign_in.html"
+    }
+
+  })
+
+  import footer_func from "./components/footer.js"
+  let footer =document.getElementById("footer")
+  footer.innerHTML=footer_func()
+
+</script>
+
