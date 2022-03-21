@@ -10,7 +10,7 @@ function header() {
     </ul>
   </div>
 
-  <a href="home.html"><div id="nav_mid">
+  <a href="index.html"><div id="nav_mid">
       <img
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Ssense_logo.svg/1200px-Ssense_logo.svg.png"
         alt=""
