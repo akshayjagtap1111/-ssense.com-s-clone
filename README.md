@@ -3,7 +3,7 @@
 
 Project: Clone of https://www.ssense.com/en-in site
 
-In this project We have tried to make a look alike clone of Ninewest E-commerce Website. With our efforts and the technology stack, that we have learned till now in Unit-4 in Masai School, we were able to clone the front end, integrated it with backend and added similar looks and features.
+In this project I have tried to make a look alike clone of Ssence.com E-commerce Website. With our efforts and the technology stack, that I have learned till now in Unit-3 in Masai School, Itried to clone the front end, and added similar looks and features.
 
 ![alt text](https://github.com/akshayjagtap1111/-ssense.com-s-clone/blob/main/project/screenshots/ss_home.png?raw=true)
 ![alt text](https://github.com/akshayjagtap1111/-ssense.com-s-clone/blob/main/project/screenshots/ss_prod1.png?raw=true)
